@@ -6,6 +6,9 @@
 
 &emsp;配置USB虚拟串口、上位机直接通过USB连接STM32播放传输数据，从而通过USB通信传输图像数据实时播放Bad Apple视频。
 
+视频演示:[在门铃CRT显示器上使用stm32播放bad apple!!](https://b23.tv/vquDAVC)  
+
+
 ![效果图](./images/01.jpg)
 
 ***  
