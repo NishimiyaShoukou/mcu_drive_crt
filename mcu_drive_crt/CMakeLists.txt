@@ -1,0 +1,173 @@
+cmake_minimum_required(VERSION 3.26)
+project(mcu_drive_crt C)
+
+set(CMAKE_C_STANDARD 11)
+
+include_directories(APP/screen)
+include_directories(Core/Inc)
+include_directories(Drivers/CMSIS)
+include_directories(Drivers/CMSIS/Device)
+include_directories(Drivers/CMSIS/Device/ST)
+include_directories(Drivers/CMSIS/Device/ST/STM32F1xx)
+include_directories(Drivers/CMSIS/Device/ST/STM32F1xx/Include)
+include_directories(Drivers/CMSIS/Include)
+include_directories(Drivers/STM32F1xx_HAL_Driver/Inc)
+include_directories(Drivers/STM32F1xx_HAL_Driver/Inc/Legacy)
+include_directories(HardWare/ntsc)
+include_directories(MDK-ARM)
+include_directories(MDK-ARM/RTE)
+include_directories(MDK-ARM/RTE/_mcu_drive_crt)
+include_directories(Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc)
+include_directories(Middlewares/ST/STM32_USB_Device_Library/Core/Inc)
+include_directories(Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS)
+include_directories(Middlewares/Third_Party/FreeRTOS/Source/include)
+include_directories(Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3)
+include_directories(USB_DEVICE/App)
+include_directories(USB_DEVICE/Target)
+
+add_executable(mcu_drive_crt
+        APP/screen/screen_main.c
+        APP/screen/screen_main.h
+        Core/Inc/dma.h
+        Core/Inc/FreeRTOSConfig.h
+        Core/Inc/gpio.h
+        Core/Inc/main.h
+        Core/Inc/spi.h
+        Core/Inc/stm32f1xx_hal_conf.h
+        Core/Inc/stm32f1xx_it.h
+        Core/Inc/tim.h
+        Core/Inc/usart.h
+        Core/Src/dma.c
+        Core/Src/freertos.c
+        Core/Src/gpio.c
+        Core/Src/main.c
+        Core/Src/spi.c
+        Core/Src/stm32f1xx_hal_msp.c
+        Core/Src/stm32f1xx_hal_timebase_tim.c
+        Core/Src/stm32f1xx_it.c
+        Core/Src/system_stm32f1xx.c
+        Core/Src/tim.c
+        Core/Src/usart.c
+        Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h
+        Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h
+        Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h
+        Drivers/CMSIS/Include/cmsis_armcc.h
+        Drivers/CMSIS/Include/cmsis_armclang.h
+        Drivers/CMSIS/Include/cmsis_compiler.h
+        Drivers/CMSIS/Include/cmsis_gcc.h
+        Drivers/CMSIS/Include/cmsis_iccarm.h
+        Drivers/CMSIS/Include/cmsis_version.h
+        Drivers/CMSIS/Include/core_armv8mbl.h
+        Drivers/CMSIS/Include/core_armv8mml.h
+        Drivers/CMSIS/Include/core_cm0.h
+        Drivers/CMSIS/Include/core_cm0plus.h
+        Drivers/CMSIS/Include/core_cm1.h
+        Drivers/CMSIS/Include/core_cm23.h
+        Drivers/CMSIS/Include/core_cm3.h
+        Drivers/CMSIS/Include/core_cm33.h
+        Drivers/CMSIS/Include/core_cm4.h
+        Drivers/CMSIS/Include/core_cm7.h
+        Drivers/CMSIS/Include/core_sc000.h
+        Drivers/CMSIS/Include/core_sc300.h
+        Drivers/CMSIS/Include/mpu_armv7.h
+        Drivers/CMSIS/Include/mpu_armv8.h
+        Drivers/CMSIS/Include/tz_context.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_cortex.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_rcc.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_system.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usart.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usb.h
+        Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c
+        Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usb.c
+        HardWare/ntsc/ntsc.c
+        HardWare/ntsc/ntsc.h
+        MDK-ARM/RTE/_mcu_drive_crt/RTE_Components.h
+        Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h
+        Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c
+        Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h
+        Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
+        Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
+        Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
+        Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c
+        Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
+        Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
+        Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c
+        Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/croutine.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/message_buffer.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/mpu_prototypes.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/stack_macros.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/StackMacros.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/stream_buffer.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+        Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+        Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
+        Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/port.c
+        Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
+        Middlewares/Third_Party/FreeRTOS/Source/croutine.c
+        Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
+        Middlewares/Third_Party/FreeRTOS/Source/list.c
+        Middlewares/Third_Party/FreeRTOS/Source/queue.c
+        Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c
+        Middlewares/Third_Party/FreeRTOS/Source/tasks.c
+        Middlewares/Third_Party/FreeRTOS/Source/timers.c
+        USB_DEVICE/App/usb_device.c
+        USB_DEVICE/App/usb_device.h
+        USB_DEVICE/App/usbd_cdc_if.c
+        USB_DEVICE/App/usbd_cdc_if.h
+        USB_DEVICE/App/usbd_desc.c
+        USB_DEVICE/App/usbd_desc.h
+        USB_DEVICE/Target/usbd_conf.c
+        USB_DEVICE/Target/usbd_conf.h)
